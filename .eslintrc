@@ -18,7 +18,7 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
@@ -29,13 +29,17 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/prop-types": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-console": "error",
+    "import/prefer-default-export": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "prettier/prettier": "error"
+    "@typescript-eslint/no-redeclare": "error",
+    "@typescript-eslint/no-use-before-define": "error",
+    "no-console": 1,
+    "comma-style": ["error", "last"],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "keyword-spacing": ["error", "always"]
   }
 }

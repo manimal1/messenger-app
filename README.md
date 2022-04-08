@@ -29,7 +29,7 @@ Run linter across the code base
 
 ## Linting and code standards
 
-A very simple setup using [Eslint](https://eslint.org/) and [Prettier](https://prettier.io/) has been employed in this starter project. It was kept basic on purpose, to allow for easy configuration based on user preferences. It will still catch all the **recommended** lint errors for standard React TypeScript apps.
+A very simple [Eslint](https://eslint.org/) configuration has been employed in this starter project. It was kept basic on purpose, to allow for easy configuration based on user preferences. It will still catch all the **recommended** lint errors for standard React TypeScript apps.
 
 ## Libraries and dependencies
 
