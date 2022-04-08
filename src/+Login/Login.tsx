@@ -41,9 +41,6 @@ const Login: FC = () => {
     })
     .catch((error) => {
       if (error) {
-        const credential =
-          GoogleAuthProvider.credentialFromError(error) || GithubAuthProvider.credentialFromError(error);
-        console.log(`Credential: ${JSON.stringify(credential)}`);
         const message = `Error: ${error.message}`;
         setErrorMessage(message);
       }
@@ -51,8 +48,6 @@ const Login: FC = () => {
 
   return (
     <CenteredCard>
-      {/* <ErrorBoundary message="One moment, trying to login ..."> */}
-      {/* <Suspense fallback={<CircularProgress color="primary" />}> */}
       <Button sx={{ marginBottom: '16px' }} startIcon={<GoogleIcon />} onClick={signIn('google')}>
         Google login
       </Button>
@@ -64,8 +59,6 @@ const Login: FC = () => {
           {errorMessage}
         </Typography>
       )}
-      {/* </Suspense> */}
-      {/* </ErrorBoundary> */}
     </CenteredCard>
   );
 };
