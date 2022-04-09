@@ -1,15 +1,28 @@
 import { FC, useState, useCallback } from 'react';
-import { GoogleAuthProvider, GithubAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import {
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  UserCredential,
+} from 'firebase/auth';
 import { Button, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import GithubIcon from '@mui/icons-material/GitHub';
+
+import { URLS } from 'routes';
 import { auth } from 'services';
 import { CenteredCard } from 'components';
+import { useAppDispatch } from 'store/hooks';
+import { addUser } from 'store/_slices/loggedInUserSlice';
 
 const Login: FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const signIn = (provider: string) =>
     useCallback(() => {
@@ -21,12 +34,12 @@ const Login: FC = () => {
     }, []);
 
   getRedirectResult(auth)
-    .then((result) => {
+    .then((result: UserCredential | null) => {
       if (!result) {
         return null;
       }
 
-      let token = null;
+      let token;
       // This gives you a Google Access Token. You can use it to access Google APIs.
       const credential =
         GoogleAuthProvider.credentialFromResult(result) || GithubAuthProvider.credentialFromResult(result);
@@ -35,9 +48,9 @@ const Login: FC = () => {
         token = credential.accessToken;
       }
 
-      // The signed-in user info.
-      const user = result.user;
-      console.log({ token }, { user });
+      const user = { ...result.user, token };
+      dispatch(addUser(user));
+      navigate(URLS.CHAT);
     })
     .catch((error) => {
       if (error) {
