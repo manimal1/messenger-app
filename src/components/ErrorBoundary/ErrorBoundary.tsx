@@ -3,7 +3,6 @@ import { Typography } from '@mui/material';
 import { CenteredCard } from 'components';
 
 interface Props {
-  // props?: Record<string, unknown>;
   message?: string;
 }
 
@@ -30,7 +29,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     if (this.state.hasError) {
       return (
         <CenteredCard width={720}>
-          <Typography variant="h2" component="h1">
+          <Typography variant="h5" component="h1">
             {msg}
           </Typography>
         </CenteredCard>
